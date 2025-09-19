@@ -1,49 +1,114 @@
-import React from 'react';
+import React, { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 
+// Static deals data - moved outside component to prevent re-creation
+const allDealsData = [
+  {
+    id: 5,
+    title: "Amazon Echo Dot (5th Gen)",
+    originalPrice: 49.99,
+    dealPrice: 29.99,
+    discount: "40% off",
+    image: "https://images.unsplash.com/photo-1543512214-318c7553f230?w=400&h=400&fit=crop",
+    rating: 4.5,
+    reviewCount: 23451,
+    category: "electronics"
+  },
+  {
+    id: 23,
+    title: "The Seven Husbands of Evelyn Hugo",
+    originalPrice: 16.99,
+    dealPrice: 9.99,
+    discount: "41% off",
+    image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400&h=400&fit=crop",
+    rating: 4.8,
+    reviewCount: 45623,
+    category: "books"
+  },
+  {
+    id: 18,
+    title: "JBL Charge 5 Portable Speaker",
+    originalPrice: 179.99,
+    dealPrice: 119.99,
+    discount: "33% off",
+    image: "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=400&h=400&fit=crop",
+    rating: 4.7,
+    reviewCount: 8765,
+    category: "electronics"
+  },
+  {
+    id: 12,
+    title: "Ninja Foodi Personal Blender",
+    originalPrice: 79.99,
+    dealPrice: 59.99,
+    discount: "25% off",
+    image: "https://images.unsplash.com/photo-1570197788417-0e82375c9371?w=400&h=400&fit=crop",
+    rating: 4.5,
+    reviewCount: 7634,
+    category: "home"
+  },
+  {
+    id: 3,
+    title: "Sony WH-1000XM5 Headphones",
+    originalPrice: 399.99,
+    dealPrice: 299.99,
+    discount: "25% off",
+    image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=400&fit=crop",
+    rating: 4.7,
+    reviewCount: 15632,
+    category: "electronics"
+  },
+  {
+    id: 31,
+    title: "KitchenAid Stand Mixer",
+    originalPrice: 449.99,
+    dealPrice: 329.99,
+    discount: "27% off",
+    image: "https://images.unsplash.com/photo-1556909114-4ba7d7e1b7e1?w=400&h=400&fit=crop",
+    rating: 4.8,
+    reviewCount: 18765,
+    category: "home"
+  },
+  {
+    id: 25,
+    title: "Atomic Habits Book",
+    originalPrice: 18.99,
+    dealPrice: 12.99,
+    discount: "32% off",
+    image: "https://images.unsplash.com/photo-1592496431122-2349e0fbc666?w=400&h=400&fit=crop",
+    rating: 4.9,
+    reviewCount: 52341,
+    category: "books"
+  },
+  {
+    id: 7,
+    title: "Instant Pot Duo 7-in-1",
+    originalPrice: 79.99,
+    dealPrice: 49.99,
+    discount: "38% off",
+    image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=400&fit=crop",
+    rating: 4.6,
+    reviewCount: 34567,
+    category: "home"
+  }
+];
+
 const TodaysDeals = () => {
-  // Get deals from your product data (products under $200)
-  const deals = [
-    {
-      id: 5,
-      title: "Amazon Echo Dot (5th Gen)",
-      originalPrice: 49.99,
-      dealPrice: 29.99,
-      discount: "40% off",
-      image: "https://images.unsplash.com/photo-1543512214-318c7553f230?w=400&h=400&fit=crop",
-      rating: 4.5,
-      reviewCount: 23451
-    },
-    {
-      id: 23,
-      title: "The Seven Husbands of Evelyn Hugo",
-      originalPrice: 16.99,
-      dealPrice: 9.99,
-      discount: "41% off",
-      image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400&h=400&fit=crop",
-      rating: 4.8,
-      reviewCount: 45623
-    },
-    {
-      id: 18,
-      title: "JBL Charge 5 Portable Speaker",
-      originalPrice: 179.99,
-      dealPrice: 119.99,
-      discount: "33% off",
-      image: "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=400&h=400&fit=crop",
-      rating: 4.7,
-      reviewCount: 8765
-    },
-    {
-      id: 12,
-      title: "Ninja Foodi Personal Blender",
-      originalPrice: 79.99,
-      dealPrice: 59.99,
-      discount: "25% off",
-      image: "https://images.unsplash.com/photo-1570197788417-0e82375c9371?w=400&h=400&fit=crop",
-      rating: 4.5,
-      reviewCount: 7634
+  const [selectedCategory, setSelectedCategory] = useState('all');
+
+  // Filter deals based on selected category
+  const filteredDeals = useMemo(() => {
+    if (selectedCategory === 'all') {
+      return allDealsData;
     }
+    return allDealsData.filter(deal => deal.category === selectedCategory);
+  }, [selectedCategory]);
+
+  const dealCategories = [
+    { id: 'all', label: 'All Deals' },
+    { id: 'electronics', label: 'Electronics' },
+    { id: 'home', label: 'Home & Kitchen' },
+    { id: 'books', label: 'Books' }
   ];
 
   return (
@@ -57,18 +122,19 @@ const TodaysDeals = () => {
         {/* Deal Categories */}
         <div className="mb-8">
           <div className="flex flex-wrap gap-4 mb-6">
-            <button className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
-              All Deals
-            </button>
-            <button className="bg-gray-200 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-300">
-              Electronics
-            </button>
-            <button className="bg-gray-200 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-300">
-              Home & Kitchen
-            </button>
-            <button className="bg-gray-200 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-300">
-              Books
-            </button>
+            {dealCategories.map(category => (
+              <button
+                key={category.id}
+                onClick={() => setSelectedCategory(category.id)}
+                className={`px-4 py-2 rounded-md font-medium transition-colors ${
+                  selectedCategory === category.id
+                    ? 'bg-blue-600 text-white hover:bg-blue-700'
+                    : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                }`}
+              >
+                {category.label}
+              </button>
+            ))}
           </div>
         </div>
 
@@ -92,21 +158,31 @@ const TodaysDeals = () => {
         </div>
 
         {/* Deals Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {deals.map(deal => (
-            <div key={deal.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-              <div className="relative">
-                <img 
-                  src={deal.image} 
-                  alt={deal.title}
-                  className="w-full h-48 object-cover"
-                />
-                <div className="absolute top-2 left-2 bg-red-600 text-white px-2 py-1 rounded text-sm font-bold">
-                  {deal.discount}
+        <div className="mb-8">
+          <div className="flex justify-between items-center mb-6">
+            <h2 className="text-2xl font-bold text-gray-900">
+              {selectedCategory === 'all' ? 'All Deals' : 
+               selectedCategory === 'electronics' ? 'Electronics Deals' :
+               selectedCategory === 'home' ? 'Home & Kitchen Deals' :
+               selectedCategory === 'books' ? 'Book Deals' : 'Deals'}
+            </h2>
+            <span className="text-gray-600">{filteredDeals.length} deals found</span>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {filteredDeals.map(deal => (
+              <div key={deal.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+                <div className="relative">
+                  <img 
+                    src={deal.image} 
+                    alt={deal.title}
+                    className="w-full h-48 object-cover"
+                  />
+                  <div className="absolute top-2 left-2 bg-red-600 text-white px-2 py-1 rounded text-sm font-bold">
+                    {deal.discount}
+                  </div>
                 </div>
-              </div>
-              <div className="p-4">
-                <h3 className="font-semibold text-lg mb-2 line-clamp-2">{deal.title}</h3>
+                <div className="p-4">
+                  <h3 className="font-semibold text-lg mb-2 line-clamp-2">{deal.title}</h3>
                 <div className="flex items-center mb-2">
                   <div className="flex text-yellow-400">
                     {[...Array(5)].map((_, i) => (
@@ -121,15 +197,16 @@ const TodaysDeals = () => {
                   <span className="text-2xl font-bold text-red-600">${deal.dealPrice}</span>
                   <span className="text-gray-500 line-through">${deal.originalPrice}</span>
                 </div>
-                <Link 
-                  to="/"
-                  className="mt-3 w-full bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-semibold py-2 px-4 rounded block text-center"
-                >
-                  View Deal
-                </Link>
+                  <Link 
+                    to="/"
+                    className="mt-3 w-full bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-semibold py-2 px-4 rounded block text-center"
+                  >
+                    View Deal
+                  </Link>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
 
         {/* Lightning Deals */}
