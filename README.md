@@ -4,7 +4,7 @@ A fully responsive Amazon clone built with React and TailwindCSS. This project r
 
 ## 🚀 Live Demo
 
-Visit the live site: [Amazon Clone on GitHub Pages](https://yaser-123.github.io/Amazon-Clone/)
+Visit the live site: [Amazon Clone on GitHub Pages](https://yaser-123.github.io/deals)
 
 ## ✨ Features
 
