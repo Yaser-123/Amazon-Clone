@@ -12,8 +12,23 @@
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     
-    <!-- TailwindCSS CDN -->
+    <!-- TailwindCSS CDN with custom configuration -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            screens: {
+              'xs': '480px',
+            },
+            spacing: {
+              '18': '4.5rem',
+              '88': '22rem',
+            }
+          }
+        }
+      }
+    </script>
     
     <title>Amazon Clone</title>
   </head>

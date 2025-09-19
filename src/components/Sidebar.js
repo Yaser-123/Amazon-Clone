@@ -113,10 +113,10 @@ const Sidebar = ({ onCategoryFilter }) => {
     <>
       {/* Mobile Toggle Button */}
       <button
-        className="lg:hidden fixed top-32 left-4 z-50 bg-gray-800 text-white p-2 rounded shadow-lg"
+        className="lg:hidden fixed top-20 sm:top-24 left-2 sm:left-4 z-50 bg-gray-800 text-white p-2 rounded shadow-lg"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
         </svg>
       </button>
@@ -131,36 +131,36 @@ const Sidebar = ({ onCategoryFilter }) => {
 
       {/* Sidebar */}
       <div className={`
-        fixed lg:static lg:translate-x-0 top-0 left-0 h-full w-80 lg:w-64 
+        fixed lg:static lg:translate-x-0 top-0 left-0 h-full w-72 sm:w-80 lg:w-64 xl:w-72
         bg-white border-r border-gray-200 transform transition-transform duration-300 ease-in-out z-40
         ${isOpen ? 'translate-x-0' : '-translate-x-full'}
         overflow-y-auto
       `}>
         {/* Sidebar Header */}
-        <div className="bg-gray-800 text-white p-4 lg:hidden">
+        <div className="bg-gray-800 text-white p-3 sm:p-4 lg:hidden">
           <div className="flex items-center justify-between">
-            <h2 className="text-lg font-bold">Browse Categories</h2>
+            <h2 className="text-base sm:text-lg font-bold">Browse Categories</h2>
             <button onClick={() => setIsOpen(false)}>
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
           </div>
         </div>
 
-        <div className="p-4">
-          <h2 className="hidden lg:block text-lg font-bold text-gray-900 mb-4">Shop by Category</h2>
+        <div className="p-3 sm:p-4">
+          <h2 className="hidden lg:block text-base lg:text-lg font-bold text-gray-900 mb-4">Shop by Category</h2>
           
           {/* Show All Products Button */}
           <button
             onClick={() => handleSubcategoryClick('all')}
-            className="w-full mb-4 bg-orange-400 hover:bg-orange-500 text-gray-900 font-medium py-2 px-4 rounded-md transition-colors duration-200"
+            className="w-full mb-4 bg-orange-400 hover:bg-orange-500 text-gray-900 font-medium py-2 px-3 sm:px-4 rounded-md transition-colors duration-200 text-sm sm:text-base"
           >
             Show All Products
           </button>
           
           {/* Categories */}
-          <div className="space-y-2">
+          <div className="space-y-1 sm:space-y-2">
             {categories.map((category, index) => (
               <CategoryItem 
                 key={index} 
@@ -171,13 +171,13 @@ const Sidebar = ({ onCategoryFilter }) => {
           </div>
 
           {/* Additional Links */}
-          <div className="mt-8 pt-6 border-t border-gray-200">
+          <div className="mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-gray-200">
             <h3 className="text-sm font-semibold text-gray-900 mb-3">Quick Links</h3>
             <ul className="space-y-2 text-sm">
               <li>
                 <button 
                   onClick={() => handleQuickLinkClick('bestsellers')}
-                  className="text-blue-600 hover:text-blue-800 hover:underline text-left"
+                  className="text-blue-600 hover:text-blue-800 hover:underline text-left w-full py-1"
                 >
                   Best Sellers
                 </button>
@@ -185,7 +185,7 @@ const Sidebar = ({ onCategoryFilter }) => {
               <li>
                 <button 
                   onClick={() => handleQuickLinkClick('new-releases')}
-                  className="text-blue-600 hover:text-blue-800 hover:underline text-left"
+                  className="text-blue-600 hover:text-blue-800 hover:underline text-left w-full py-1"
                 >
                   New Releases
                 </button>
@@ -193,7 +193,7 @@ const Sidebar = ({ onCategoryFilter }) => {
               <li>
                 <button 
                   onClick={() => handleQuickLinkClick('deals')}
-                  className="text-blue-600 hover:text-blue-800 hover:underline text-left"
+                  className="text-blue-600 hover:text-blue-800 hover:underline text-left w-full py-1"
                 >
                   Today's Deals
                 </button>
@@ -201,7 +201,7 @@ const Sidebar = ({ onCategoryFilter }) => {
               <li>
                 <button 
                   onClick={() => handleQuickLinkClick('reviews')}
-                  className="text-blue-600 hover:text-blue-800 hover:underline text-left"
+                  className="text-blue-600 hover:text-blue-800 hover:underline text-left w-full py-1"
                 >
                   Customer Reviews
                 </button>
@@ -209,7 +209,7 @@ const Sidebar = ({ onCategoryFilter }) => {
               <li>
                 <button 
                   onClick={() => handleQuickLinkClick('gifts')}
-                  className="text-blue-600 hover:text-blue-800 hover:underline text-left"
+                  className="text-blue-600 hover:text-blue-800 hover:underline text-left w-full py-1"
                 >
                   Gift Ideas
                 </button>
@@ -218,21 +218,21 @@ const Sidebar = ({ onCategoryFilter }) => {
           </div>
 
           {/* Help Section */}
-          <div className="mt-6 pt-6 border-t border-gray-200">
+          <div className="mt-4 sm:mt-6 pt-4 sm:pt-6 border-t border-gray-200">
             <h3 className="text-sm font-semibold text-gray-900 mb-3">Help & Settings</h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <button className="text-gray-600 hover:text-gray-800 text-left">
+                <button className="text-gray-600 hover:text-gray-800 text-left w-full py-1">
                   Your Account
                 </button>
               </li>
               <li>
-                <button className="text-gray-600 hover:text-gray-800 text-left">
+                <button className="text-gray-600 hover:text-gray-800 text-left w-full py-1">
                   Customer Service
                 </button>
               </li>
               <li>
-                <button className="text-gray-600 hover:text-gray-800 text-left">
+                <button className="text-gray-600 hover:text-gray-800 text-left w-full py-1">
                   Sign In
                 </button>
               </li>
@@ -251,7 +251,7 @@ const CategoryItem = ({ category, onSubcategoryClick }) => {
   return (
     <div className="border-b border-gray-100 last:border-b-0">
       <button
-        className="w-full flex items-center justify-between py-3 text-left hover:bg-gray-50 focus:outline-none"
+        className="w-full flex items-center justify-between py-2 sm:py-3 text-left hover:bg-gray-50 focus:outline-none px-2 sm:px-0"
         onClick={() => setIsExpanded(!isExpanded)}
       >
         <span className="text-sm font-medium text-gray-900">{category.title}</span>
@@ -266,8 +266,8 @@ const CategoryItem = ({ category, onSubcategoryClick }) => {
       </button>
       
       {isExpanded && (
-        <div className="pb-3 pl-4">
-          <ul className="space-y-2">
+        <div className="pb-2 sm:pb-3 pl-2 sm:pl-4">
+          <ul className="space-y-1 sm:space-y-2">
             {category.subcategories.map((subcategory, index) => (
               <li key={index}>
                 <button 

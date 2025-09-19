@@ -15,12 +15,14 @@ const Home = ({ searchQuery, searchCategory }) => {
       <Sidebar onCategoryFilter={handleCategoryFilter} />
       
       {/* Main Content */}
-      <ProductGrid 
-        categoryFilter={categoryFilter} 
-        onClearFilter={handleCategoryFilter}
-        searchQuery={searchQuery}
-        searchCategory={searchCategory}
-      />
+      <div className="flex-1 lg:ml-0"> {/* Ensures content doesn't overlap with sidebar on desktop */}
+        <ProductGrid 
+          categoryFilter={categoryFilter} 
+          onClearFilter={handleCategoryFilter}
+          searchQuery={searchQuery}
+          searchCategory={searchCategory}
+        />
+      </div>
     </div>
   );
 };

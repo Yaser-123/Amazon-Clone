@@ -143,14 +143,14 @@ const ProductGrid = ({ categoryFilter, onClearFilter, searchQuery, searchCategor
   };
 
   return (
-    <div className="flex-1 p-4">
+    <div className="flex-1 p-2 sm:p-4">
       {/* Header and Sorting */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
+      <div className="flex flex-col space-y-4 sm:space-y-0 sm:flex-row sm:items-center sm:justify-between mb-4 sm:mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">
+          <h1 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">
             {getCategoryDisplayName()}
           </h1>
-          <p className="text-gray-600">
+          <p className="text-sm sm:text-base text-gray-600">
             {sortedProducts.length} results
             {categoryFilter && categoryFilter !== 'all' && (
               <button 
@@ -163,7 +163,7 @@ const ProductGrid = ({ categoryFilter, onClearFilter, searchQuery, searchCategor
           </p>
         </div>
         
-        <div className="mt-4 sm:mt-0">
+        <div className="w-full sm:w-auto">
           <label htmlFor="sort" className="block text-sm font-medium text-gray-700 mb-1">
             Sort by:
           </label>
@@ -171,7 +171,7 @@ const ProductGrid = ({ categoryFilter, onClearFilter, searchQuery, searchCategor
             id="sort"
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value)}
-            className="border border-gray-300 rounded-md px-3 py-2 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full sm:w-auto border border-gray-300 rounded-md px-3 py-2 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             <option value="featured">Featured</option>
             <option value="price-low">Price: Low to High</option>
@@ -184,20 +184,20 @@ const ProductGrid = ({ categoryFilter, onClearFilter, searchQuery, searchCategor
 
       {/* Product Grid */}
       {sortedProducts.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-3 sm:gap-4 lg:gap-6 mb-6 sm:mb-8">
           {currentProducts.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
         </div>
       ) : (
-        <div className="text-center py-12">
+        <div className="text-center py-8 sm:py-12">
           <div className="mb-4">
-            <svg className="w-16 h-16 mx-auto text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-12 h-12 sm:w-16 sm:h-16 mx-auto text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
           </div>
-          <h3 className="text-lg font-medium text-gray-900 mb-2">No products found</h3>
-          <p className="text-gray-600 mb-4">
+          <h3 className="text-base sm:text-lg font-medium text-gray-900 mb-2">No products found</h3>
+          <p className="text-sm sm:text-base text-gray-600 mb-4 px-4">
             No products match your current filter. Try selecting a different category.
           </p>
           <button
@@ -211,18 +211,19 @@ const ProductGrid = ({ categoryFilter, onClearFilter, searchQuery, searchCategor
 
       {/* Pagination */}
       {totalPages > 1 && (
-        <div className="flex justify-center items-center space-x-2">
+        <div className="flex flex-wrap justify-center items-center gap-2 mb-4">
           {/* Previous Button */}
           <button
             onClick={() => handlePageChange(currentPage - 1)}
             disabled={currentPage === 1}
-            className={`px-3 py-2 rounded-md ${
+            className={`px-2 sm:px-3 py-2 rounded-md text-sm ${
               currentPage === 1
                 ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
                 : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'
             }`}
           >
-            Previous
+            <span className="hidden sm:inline">Previous</span>
+            <span className="sm:hidden">Prev</span>
           </button>
 
           {/* Page Numbers */}
@@ -231,13 +232,13 @@ const ProductGrid = ({ categoryFilter, onClearFilter, searchQuery, searchCategor
             if (
               page === 1 ||
               page === totalPages ||
-              (page >= currentPage - 2 && page <= currentPage + 2)
+              (page >= currentPage - 1 && page <= currentPage + 1)
             ) {
               return (
                 <button
                   key={page}
                   onClick={() => handlePageChange(page)}
-                  className={`px-3 py-2 rounded-md ${
+                  className={`px-2 sm:px-3 py-2 rounded-md text-sm ${
                     currentPage === page
                       ? 'bg-blue-600 text-white'
                       : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'
@@ -247,11 +248,11 @@ const ProductGrid = ({ categoryFilter, onClearFilter, searchQuery, searchCategor
                 </button>
               );
             } else if (
-              page === currentPage - 3 ||
-              page === currentPage + 3
+              page === currentPage - 2 ||
+              page === currentPage + 2
             ) {
               return (
-                <span key={page} className="px-2 py-2 text-gray-500">
+                <span key={page} className="px-1 sm:px-2 py-2 text-gray-500 text-sm">
                   ...
                 </span>
               );
@@ -263,19 +264,20 @@ const ProductGrid = ({ categoryFilter, onClearFilter, searchQuery, searchCategor
           <button
             onClick={() => handlePageChange(currentPage + 1)}
             disabled={currentPage === totalPages}
-            className={`px-3 py-2 rounded-md ${
+            className={`px-2 sm:px-3 py-2 rounded-md text-sm ${
               currentPage === totalPages
                 ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
                 : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'
             }`}
           >
-            Next
+            <span className="hidden sm:inline">Next</span>
+            <span className="sm:hidden">Next</span>
           </button>
         </div>
       )}
 
       {/* Results Summary */}
-      <div className="mt-6 text-center text-sm text-gray-600">
+      <div className="mt-4 sm:mt-6 text-center text-xs sm:text-sm text-gray-600">
         Showing {startIndex + 1}-{Math.min(endIndex, sortedProducts.length)} of {sortedProducts.length} results
       </div>
     </div>
