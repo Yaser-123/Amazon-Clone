@@ -19,41 +19,50 @@ const ProductGrid = ({ categoryFilter, onClearFilter }) => {
       
       switch (categoryFilter) {
         case 'electronics-computers':
-          return productId === 4; // MacBook Air
+          return [4, 15, 16].includes(productId); // MacBook Air, Dell XPS 13, HP Gaming Desktop
         case 'electronics-phones':
-          return productId === 1; // iPhone 15 Pro Max
+          return [1, 13, 14].includes(productId); // iPhone 15 Pro Max, Samsung Galaxy S24, Google Pixel 8
         case 'electronics-audio':
-          return productId === 3 || productId === 9; // Sony Headphones + AirPods Pro
+          return [3, 9, 17, 18].includes(productId); // Sony Headphones, AirPods Pro, Bose QC45, JBL Charge 5
         case 'electronics-gaming':
-          return productId === 6; // Nintendo Switch
+          return [6, 19, 20].includes(productId); // Nintendo Switch, PlayStation 5, Xbox Series X
         case 'electronics-smart':
-          return productId === 5 || productId === 2; // Echo Dot + Smart TV
+          return [5, 2, 21, 22].includes(productId); // Echo Dot, Samsung TV, Ring Doorbell, Philips Hue
         case 'books-fiction':
+          return [23, 24].includes(productId); // Seven Husbands of Evelyn Hugo, Where the Crawdads Sing
         case 'books-nonfiction':
+          return [25, 26].includes(productId); // Atomic Habits, Educated
         case 'books-textbooks':
+          return [27, 28].includes(productId); // Campbell Biology, Calculus
         case 'books-children':
-          return productId === 8; // Kindle Paperwhite
+          return [29, 30].includes(productId); // Green Eggs and Ham, Very Hungry Caterpillar
         case 'home-kitchen':
+          return [7, 12, 31, 32].includes(productId); // Instant Pot, Ninja Blender, KitchenAid Mixer, Ninja Foodi
         case 'home-furniture':
+          return [33, 34].includes(productId); // West Elm Coffee Table, Ashley Sofa
         case 'home-decor':
+          return [10].includes(productId); // YETI Tumbler
         case 'home-bedding':
+          return [35].includes(productId); // Brooklinen Sheets
         case 'home-storage':
-          return productId === 7 || productId === 10 || productId === 12; // Instant Pot + YETI Tumbler + Ninja Blender
+          return [36].includes(productId); // Container Store Closet System
         case 'health-fitness':
-        case 'beauty-health':
         case 'sports-fitness':
+          return [11, 37, 38, 39, 40].includes(productId); // Fitbit, Apple Watch, Garmin Watch, NordicTrack, Bowflex
+        case 'beauty-health':
+          return [11, 37, 38].includes(productId); // Health trackers
         case 'sports-outdoor':
-          return productId === 11; // Fitbit Charge 5
+          return [39, 40].includes(productId); // Treadmill, Dumbbells
         case 'bestsellers':
           return product.rating >= 4.7; // High-rated products
         case 'new-releases':
-          return productId >= 9; // Later products (AirPods, YETI, Fitbit, Ninja)
+          return productId >= 35; // Latest products
         case 'deals':
-          return product.price <= 150; // Lower-priced items
+          return product.price <= 200; // Lower-priced items
         case 'reviews':
           return product.reviewCount >= 15000; // Products with many reviews
         case 'gifts':
-          return productId === 5 || productId === 9 || productId === 10 || productId === 8; // Echo, AirPods, YETI, Kindle
+          return [5, 8, 9, 10, 21, 22, 29, 30, 37].includes(productId); // Gift-worthy items
         default:
           return true;
       }
