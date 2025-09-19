@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Sidebar from '../components/Sidebar';
 import ProductGrid from '../components/ProductGrid';
 
-const Home = () => {
+const Home = ({ searchQuery, searchCategory }) => {
   const [categoryFilter, setCategoryFilter] = useState('all');
 
   const handleCategoryFilter = (filter) => {
@@ -18,6 +18,8 @@ const Home = () => {
       <ProductGrid 
         categoryFilter={categoryFilter} 
         onClearFilter={handleCategoryFilter}
+        searchQuery={searchQuery}
+        searchCategory={searchCategory}
       />
     </div>
   );

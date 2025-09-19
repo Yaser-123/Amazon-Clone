@@ -2,19 +2,38 @@ import React, { useState, useMemo } from 'react';
 import ProductCard from './ProductCard';
 import productsData from '../data/products.json';
 
-const ProductGrid = ({ categoryFilter, onClearFilter }) => {
+const ProductGrid = ({ categoryFilter, onClearFilter, searchQuery, searchCategory }) => {
   const [sortBy, setSortBy] = useState('featured');
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 12;
 
-  // Filter products based on category
+  // Filter products based on category and search
   const filteredProducts = useMemo(() => {
+    let products = productsData;
+
+    // Apply search filter first
+    if (searchQuery && searchQuery.trim() !== '') {
+      products = products.filter(product => {
+        const searchText = `${product.title} ${product.description}`.toLowerCase();
+        const query = searchQuery.toLowerCase();
+        
+        // If a specific search category is selected, filter by that too
+        if (searchCategory && searchCategory !== 'All') {
+          const categoryMatch = searchText.includes(searchCategory.toLowerCase());
+          return searchText.includes(query) && categoryMatch;
+        }
+        
+        return searchText.includes(query);
+      });
+    }
+
+    // Then apply category filter
     if (!categoryFilter || categoryFilter === 'all') {
-      return productsData;
+      return products;
     }
     
     // Match products to categories based on our actual product data
-    return productsData.filter(product => {
+    return products.filter(product => {
       const productId = product.id;
       
       switch (categoryFilter) {
@@ -67,7 +86,7 @@ const ProductGrid = ({ categoryFilter, onClearFilter }) => {
           return true;
       }
     });
-  }, [categoryFilter]);
+  }, [categoryFilter, searchQuery, searchCategory]);
 
   // Sort products based on selected option
   const sortedProducts = useMemo(() => {
@@ -99,6 +118,10 @@ const ProductGrid = ({ categoryFilter, onClearFilter }) => {
   };
 
   const getCategoryDisplayName = () => {
+    if (searchQuery && searchQuery.trim() !== '') {
+      return `Search results for "${searchQuery}"`;
+    }
+    
     if (!categoryFilter || categoryFilter === 'all') return 'All Products';
     
     const categoryNames = {

@@ -1,10 +1,29 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 
-const Navbar = () => {
+const Navbar = ({ onSearch }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchCategory, setSearchCategory] = useState('All');
   const { getCartItemsCount } = useCart();
+  const navigate = useNavigate();
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (onSearch) {
+      onSearch(searchQuery, searchCategory);
+    }
+    // Navigate to home page to show search results
+    navigate('/');
+  };
+
+  const handleInputChange = (e) => {
+    setSearchQuery(e.target.value);
+    if (onSearch) {
+      onSearch(e.target.value, searchCategory);
+    }
+  };
 
   return (
     <nav className="bg-gray-900 text-white">
@@ -34,8 +53,12 @@ const Navbar = () => {
 
             {/* Search Bar */}
             <div className="flex-1 max-w-2xl mx-4">
-              <div className="flex">
-                <select className="bg-gray-200 text-gray-900 px-3 py-2 rounded-l-md border-r border-gray-300 focus:outline-none">
+              <form onSubmit={handleSearch} className="flex">
+                <select 
+                  className="bg-gray-200 text-gray-900 px-3 py-2 rounded-l-md border-r border-gray-300 focus:outline-none"
+                  value={searchCategory}
+                  onChange={(e) => setSearchCategory(e.target.value)}
+                >
                   <option>All</option>
                   <option>Electronics</option>
                   <option>Books</option>
@@ -46,13 +69,18 @@ const Navbar = () => {
                   type="text"
                   placeholder="Search Amazon"
                   className="flex-1 px-4 py-2 text-gray-900 focus:outline-none"
+                  value={searchQuery}
+                  onChange={handleInputChange}
                 />
-                <button className="bg-orange-400 hover:bg-orange-500 px-4 py-2 rounded-r-md">
+                <button 
+                  type="submit"
+                  className="bg-orange-400 hover:bg-orange-500 px-4 py-2 rounded-r-md"
+                >
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
                   </svg>
                 </button>
-              </div>
+              </form>
             </div>
 
             {/* Right Side Menu */}
@@ -114,11 +142,11 @@ const Navbar = () => {
               </svg>
               <span>All</span>
             </button>
-            <Link to="/" className="hover:border border-white px-2 py-1">Today's Deals</Link>
-            <Link to="/" className="hover:border border-white px-2 py-1">Customer Service</Link>
-            <Link to="/" className="hover:border border-white px-2 py-1">Registry</Link>
-            <Link to="/" className="hover:border border-white px-2 py-1">Gift Cards</Link>
-            <Link to="/" className="hover:border border-white px-2 py-1">Sell</Link>
+            <Link to="/deals" className="hover:border border-white px-2 py-1">Today's Deals</Link>
+            <Link to="/customer-service" className="hover:border border-white px-2 py-1">Customer Service</Link>
+            <Link to="/registry" className="hover:border border-white px-2 py-1">Registry</Link>
+            <Link to="/gift-cards" className="hover:border border-white px-2 py-1">Gift Cards</Link>
+            <Link to="/sell" className="hover:border border-white px-2 py-1">Sell</Link>
           </div>
         </div>
       </div>
