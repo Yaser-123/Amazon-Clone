@@ -9,6 +9,19 @@
 [![GitHub Forks](https://img.shields.io/github/forks/Yaser-123/Amazon-Clone?style=for-the-badge&color=blue)](https://github.com/Yaser-123/Amazon-Clone/network/members)
 [![GitHub Issues](https://img.shields.io/github/issues/Yaser-123/Amazon-Clone?style=for-the-badge&color=red)](https://github.com/Yaser-123/Amazon-Clone/issues)
 
+### 📱 **Quick Access QR Code**
+<table>
+<tr>
+<td align="center">
+<img src="./public/Images/amazon-clone-qr.png" alt="QR Code" width="150" height="150">
+<br>
+<strong>📲 Scan to Visit Live Site</strong>
+<br>
+<em>Point your phone camera at the QR code</em>
+</td>
+</tr>
+</table>
+
 *A pixel-perfect, fully responsive Amazon clone built with modern React technologies*
 
 </div>
@@ -99,13 +112,14 @@ amazon-clone/
 │   ├── 📄 favicon.ico             # Site icon
 │   ├── 📄 manifest.json           # PWA configuration
 │   ├── 📄 robots.txt              # SEO configuration
-│   └── 📁 Images/                 # README screenshots
+│   └── 📁 Images/                 # README screenshots & QR code
 │       ├── 🖼️ Products.png
 │       ├── 🖼️ Deals.png
 │       ├── 🖼️ customer_service.png
 │       ├── 🖼️ registery&gifts.png
 │       ├── 🖼️ creategiftcard.png
-│       └── 🖼️ subscription.png
+│       ├── 🖼️ subscription.png
+│       └── 📱 amazon-clone-qr.png  # QR code for quick access
 │
 ├── 📁 src/
 │   ├── 📄 App.js                  # Main application component
