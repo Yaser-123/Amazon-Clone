@@ -64,7 +64,7 @@ const allDealsData = [
     originalPrice: 449.99,
     dealPrice: 329.99,
     discount: "27% off",
-    image: "https://images.unsplash.com/photo-1556909114-4ba7d7e1b7e1?w=400&h=400&fit=crop",
+    image: "https://images.unsplash.com/photo-1595644258096-69155da290fd?q=80&w=1169&auto=format&fit=crop",
     rating: 4.8,
     reviewCount: 18765,
     category: "home"
