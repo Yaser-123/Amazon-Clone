@@ -1,0 +1,253 @@
+import React, { useState, useMemo } from 'react';
+import ProductCard from './ProductCard';
+import productsData from '../data/products.json';
+
+const ProductGrid = ({ categoryFilter, onClearFilter }) => {
+  const [sortBy, setSortBy] = useState('featured');
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 12;
+
+  // Filter products based on category
+  const filteredProducts = useMemo(() => {
+    if (!categoryFilter || categoryFilter === 'all') {
+      return productsData;
+    }
+    
+    // Match products to categories based on our actual product data
+    return productsData.filter(product => {
+      const productId = product.id;
+      
+      switch (categoryFilter) {
+        case 'electronics-computers':
+          return productId === 4; // MacBook Air
+        case 'electronics-phones':
+          return productId === 1; // iPhone 15 Pro Max
+        case 'electronics-audio':
+          return productId === 3 || productId === 9; // Sony Headphones + AirPods Pro
+        case 'electronics-gaming':
+          return productId === 6; // Nintendo Switch
+        case 'electronics-smart':
+          return productId === 5 || productId === 2; // Echo Dot + Smart TV
+        case 'books-fiction':
+        case 'books-nonfiction':
+        case 'books-textbooks':
+        case 'books-children':
+          return productId === 8; // Kindle Paperwhite
+        case 'home-kitchen':
+        case 'home-furniture':
+        case 'home-decor':
+        case 'home-bedding':
+        case 'home-storage':
+          return productId === 7 || productId === 10 || productId === 12; // Instant Pot + YETI Tumbler + Ninja Blender
+        case 'health-fitness':
+        case 'beauty-health':
+        case 'sports-fitness':
+        case 'sports-outdoor':
+          return productId === 11; // Fitbit Charge 5
+        case 'bestsellers':
+          return product.rating >= 4.7; // High-rated products
+        case 'new-releases':
+          return productId >= 9; // Later products (AirPods, YETI, Fitbit, Ninja)
+        case 'deals':
+          return product.price <= 150; // Lower-priced items
+        case 'reviews':
+          return product.reviewCount >= 15000; // Products with many reviews
+        case 'gifts':
+          return productId === 5 || productId === 9 || productId === 10 || productId === 8; // Echo, AirPods, YETI, Kindle
+        default:
+          return true;
+      }
+    });
+  }, [categoryFilter]);
+
+  // Sort products based on selected option
+  const sortedProducts = useMemo(() => {
+    const products = [...filteredProducts];
+    
+    switch (sortBy) {
+      case 'price-low':
+        return products.sort((a, b) => a.price - b.price);
+      case 'price-high':
+        return products.sort((a, b) => b.price - a.price);
+      case 'rating':
+        return products.sort((a, b) => b.rating - a.rating);
+      case 'newest':
+        return products.sort((a, b) => b.id - a.id);
+      default:
+        return products;
+    }
+  }, [filteredProducts, sortBy]);
+
+  // Paginate products
+  const totalPages = Math.ceil(sortedProducts.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentProducts = sortedProducts.slice(startIndex, endIndex);
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const getCategoryDisplayName = () => {
+    if (!categoryFilter || categoryFilter === 'all') return 'All Products';
+    
+    const categoryNames = {
+      'electronics-computers': 'Computers & Laptops',
+      'electronics-phones': 'Mobile Phones',
+      'electronics-audio': 'Audio & Headphones',
+      'electronics-gaming': 'Gaming',
+      'electronics-smart': 'Smart Home Devices',
+      'home-kitchen': 'Kitchen & Dining',
+      'books-fiction': 'Books & Reading',
+      'health-fitness': 'Health & Fitness',
+      'home-decor': 'Home & Decor',
+      'bestsellers': 'Best Sellers',
+      'new-releases': 'New Releases',
+      'deals': "Today's Deals"
+    };
+    
+    return categoryNames[categoryFilter] || 'Products';
+  };
+
+  return (
+    <div className="flex-1 p-4">
+      {/* Header and Sorting */}
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
+        <div>
+          <h1 className="text-2xl font-bold text-gray-900 mb-2">
+            {getCategoryDisplayName()}
+          </h1>
+          <p className="text-gray-600">
+            {sortedProducts.length} results
+            {categoryFilter && categoryFilter !== 'all' && (
+              <button 
+                onClick={() => onClearFilter && onClearFilter('all')} 
+                className="ml-2 text-blue-600 hover:text-blue-800 text-sm underline"
+              >
+                (Clear filter)
+              </button>
+            )}
+          </p>
+        </div>
+        
+        <div className="mt-4 sm:mt-0">
+          <label htmlFor="sort" className="block text-sm font-medium text-gray-700 mb-1">
+            Sort by:
+          </label>
+          <select
+            id="sort"
+            value={sortBy}
+            onChange={(e) => setSortBy(e.target.value)}
+            className="border border-gray-300 rounded-md px-3 py-2 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            <option value="featured">Featured</option>
+            <option value="price-low">Price: Low to High</option>
+            <option value="price-high">Price: High to Low</option>
+            <option value="rating">Customer Rating</option>
+            <option value="newest">Newest Arrivals</option>
+          </select>
+        </div>
+      </div>
+
+      {/* Product Grid */}
+      {sortedProducts.length > 0 ? (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8">
+          {currentProducts.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </div>
+      ) : (
+        <div className="text-center py-12">
+          <div className="mb-4">
+            <svg className="w-16 h-16 mx-auto text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </div>
+          <h3 className="text-lg font-medium text-gray-900 mb-2">No products found</h3>
+          <p className="text-gray-600 mb-4">
+            No products match your current filter. Try selecting a different category.
+          </p>
+          <button
+            onClick={() => onClearFilter && onClearFilter('all')}
+            className="bg-orange-400 hover:bg-orange-500 text-gray-900 font-medium py-2 px-4 rounded-md transition-colors duration-200"
+          >
+            Show All Products
+          </button>
+        </div>
+      )}
+
+      {/* Pagination */}
+      {totalPages > 1 && (
+        <div className="flex justify-center items-center space-x-2">
+          {/* Previous Button */}
+          <button
+            onClick={() => handlePageChange(currentPage - 1)}
+            disabled={currentPage === 1}
+            className={`px-3 py-2 rounded-md ${
+              currentPage === 1
+                ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'
+            }`}
+          >
+            Previous
+          </button>
+
+          {/* Page Numbers */}
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => {
+            // Show only a few pages around current page
+            if (
+              page === 1 ||
+              page === totalPages ||
+              (page >= currentPage - 2 && page <= currentPage + 2)
+            ) {
+              return (
+                <button
+                  key={page}
+                  onClick={() => handlePageChange(page)}
+                  className={`px-3 py-2 rounded-md ${
+                    currentPage === page
+                      ? 'bg-blue-600 text-white'
+                      : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'
+                  }`}
+                >
+                  {page}
+                </button>
+              );
+            } else if (
+              page === currentPage - 3 ||
+              page === currentPage + 3
+            ) {
+              return (
+                <span key={page} className="px-2 py-2 text-gray-500">
+                  ...
+                </span>
+              );
+            }
+            return null;
+          })}
+
+          {/* Next Button */}
+          <button
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}
+            className={`px-3 py-2 rounded-md ${
+              currentPage === totalPages
+                ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'
+            }`}
+          >
+            Next
+          </button>
+        </div>
+      )}
+
+      {/* Results Summary */}
+      <div className="mt-6 text-center text-sm text-gray-600">
+        Showing {startIndex + 1}-{Math.min(endIndex, sortedProducts.length)} of {sortedProducts.length} results
+      </div>
+    </div>
+  );
+};
+
+export default ProductGrid;

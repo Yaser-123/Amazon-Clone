@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "title": "Apple iPhone 15 Pro Max, 256GB, Natural Titanium",
+    "description": "The iPhone 15 Pro Max features a stunning 6.7-inch Super Retina XDR display, A17 Pro chip, and advanced camera system with 5x Telephoto lens.",
+    "image": "https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=400&h=400&fit=crop",
+    "price": 1199.99,
+    "rating": 4.8,
+    "reviewCount": 12543
+  },
+  {
+    "id": 2,
+    "title": "Samsung 65\" Class Neo QLED 4K QN90C Smart TV",
+    "description": "Experience brilliant picture quality with Quantum Dot technology and Mini LED backlighting for precise contrast control.",
+    "image": "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=400&h=400&fit=crop",
+    "price": 1899.99,
+    "rating": 4.6,
+    "reviewCount": 8742
+  },
+  {
+    "id": 3,
+    "title": "Sony WH-1000XM5 Wireless Noise Canceling Headphones",
+    "description": "Industry-leading noise canceling with new Auto NC Optimizer, exceptional call quality, and up to 30 hour battery life.",
+    "image": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=400&fit=crop",
+    "price": 399.99,
+    "rating": 4.7,
+    "reviewCount": 15632
+  },
+  {
+    "id": 4,
+    "title": "Apple MacBook Air 15-inch: Apple M2 chip with 8-core CPU",
+    "description": "Supercharged by the Apple M2 chip, the redesigned MacBook Air combines incredible performance and up to 18 hours of battery life.",
+    "image": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=400&h=400&fit=crop",
+    "price": 1299.99,
+    "rating": 4.9,
+    "reviewCount": 9876
+  },
+  {
+    "id": 5,
+    "title": "Amazon Echo Dot (5th Gen) Smart speaker with Alexa",
+    "description": "Our most popular smart speaker with a fabric design. Ready to help with music, smart home control, and more.",
+    "image": "https://images.unsplash.com/photo-1543512214-318c7553f230?w=400&h=400&fit=crop",
+    "price": 49.99,
+    "rating": 4.5,
+    "reviewCount": 23451
+  },
+  {
+    "id": 6,
+    "title": "Nintendo Switch OLED Model with Neon Red and Neon Blue Joy-Con",
+    "description": "Play at home or on the go with a vivid 7-inch OLED screen that makes colors pop.",
+    "image": "https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?w=400&h=400&fit=crop",
+    "price": 349.99,
+    "rating": 4.8,
+    "reviewCount": 18765
+  },
+  {
+    "id": 7,
+    "title": "Instant Pot Duo 7-in-1 Electric Pressure Cooker, 6 Quart",
+    "description": "7 appliances in 1: Pressure Cooker, Slow Cooker, Rice Cooker, Yogurt Maker, Steamer, Sauté Pan, and Food Warmer.",
+    "image": "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=400&fit=crop",
+    "price": 79.99,
+    "rating": 4.6,
+    "reviewCount": 34567
+  },
+  {
+    "id": 8,
+    "title": "Kindle Paperwhite (11th Generation) - 6.8\" display",
+    "description": "Purpose-built for reading with a flush-front design and 300 ppi glare-free display that reads like real paper.",
+    "image": "https://images.unsplash.com/photo-1481349518771-20055b2a7b24?w=400&h=400&fit=crop",
+    "price": 139.99,
+    "rating": 4.7,
+    "reviewCount": 28934
+  },
+  {
+    "id": 9,
+    "title": "Apple AirPods Pro (2nd Generation) with MagSafe Case",
+    "description": "Rebuilt from the sound up. The new AirPods Pro have been re-engineered to deliver even more of that magical AirPods experience.",
+    "image": "https://images.unsplash.com/photo-1572569511254-d8f925fe2cbb?w=400&h=400&fit=crop",
+    "price": 249.99,
+    "rating": 4.8,
+    "reviewCount": 16789
+  },
+  {
+    "id": 10,
+    "title": "YETI Rambler 20 oz Tumbler, Stainless Steel, Vacuum Insulated",
+    "description": "Double-wall vacuum insulation keeps cold drinks cold and hot drinks hot until the last sip.",
+    "image": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=400&fit=crop",
+    "price": 34.99,
+    "rating": 4.9,
+    "reviewCount": 12456
+  },
+  {
+    "id": 11,
+    "title": "Fitbit Charge 5 Advanced Fitness & Health Tracker",
+    "description": "Built-in GPS, Daily Readiness Score, Health Metrics Dashboard, 6+ day battery, and more.",
+    "image": "https://images.unsplash.com/photo-1575311373937-040b8e1fd5b6?w=400&h=400&fit=crop",
+    "price": 149.99,
+    "rating": 4.4,
+    "reviewCount": 9823
+  },
+  {
+    "id": 12,
+    "title": "Ninja Foodi Personal Blender with 18 oz. BPA Free Cup",
+    "description": "Blast through ice and frozen fruit in 20 seconds. The Ninja blade assembly is perfectly designed for crushing.",
+    "image": "https://images.unsplash.com/photo-1570197788417-0e82375c9371?w=400&h=400&fit=crop",
+    "price": 79.99,
+    "rating": 4.5,
+    "reviewCount": 7634
+  }
+]
